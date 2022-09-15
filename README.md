@@ -3,9 +3,9 @@ An example of using a Markov chain to generate levels like those from Super Mari
 
 Scripts:
 
--train.py: code that trains a Markov chain on the levels from Super Mario Bros. 1 and 2 (The Lost Levels)
--generate.py: code that generates a new level from the trained Markov chain, overwriting the existing level
--visualize.py: code that visualizes the generated level with assets from Kenney's Platformer Asset Pack
+- train.py: code that trains a Markov chain on the levels from Super Mario Bros. 1 and 2 (The Lost Levels)
+- generate.py: code that generates a new level from the trained Markov chain, overwriting the existing level
+- visualize.py: code that visualizes the generated level with assets from Kenney's Platformer Asset Pack
 
 To run the code take the following steps: 
 
