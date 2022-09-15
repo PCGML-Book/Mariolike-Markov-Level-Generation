@@ -10,7 +10,7 @@ from PIL import Image #Need to import this to do image editing
 
 #Load the set of all sprites
 sprites = {}
-for filename in glob.glob("./sprites/*.png"):
+for filename in glob.glob(os.path.join(os.getcwd(), "sprites", "*.png")):
 	im = Image.open(filename)
 	splits = filename.split("/")
 	name = splits[-1][:-4]
@@ -32,7 +32,7 @@ visualization["b"] = "arrowBottom"
 
 # This reads in the level
 level = {}
-with open("./Generated Levels/output.txt") as fp:
+with open(os.path.join(os.getcwd(), "Generated Levels", "output.txt")) as fp:
 	y = 0
 	for line in fp:
 		level[y] = line

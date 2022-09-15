@@ -24,7 +24,7 @@ for y in range(maxY, -1, -1):
 	level[y] =""
 	for x in range(0, maxX): #We generate one tile at a time for each iteration of this inner loop
 
-		#Grab the current key, the three dependent values
+		#Grab the current state, the three dependent values
 		west = " "
 		southwest = " "
 		south = " "
@@ -36,30 +36,30 @@ for y in range(maxY, -1, -1):
 		if x>0 and y<maxY: 
 			southwest = level[y+1][x]
 
-		key = west+southwest+south
+		state = west+southwest+south
 
 		#Query the Markov chain to see what tile value we should place at this tile location
-		if key in markovProbabilities.keys():
+		if state in markovProbabilities.keys():
 			
 			#Greedy Sampling. 
 			#Uncomment this and comment the Weighted Sampling section below to see what greedy sampling looks like (and why we don't tend to use it)
 			'''
 			maxValueTile = "-"
 			maxValue = 0.0
-			for key2 in markovProbabilities[key]:
-				if markovProbabilities[key][key2] >maxValue:
-					maxValue = markovProbabilities[key][key2]
-					maxValueTile = key2
+			for action in markovProbabilities[state]:
+				if markovProbabilities[state][action] >maxValue:
+					maxValue = markovProbabilities[state][action]
+					maxValueTile = action
 			level[y] +=maxValueTile #Add the tile value (tokenToUse) to the level
 			'''
 			#Weighted Sampling
 			randValue = random.random()
 			currProb = 0
 			tokenToUse = "-"
-			for key2 in markovProbabilities[key]:
-				currProb+=markovProbabilities[key][key2]
+			for action in markovProbabilities[state]:
+				currProb+=markovProbabilities[state][action]
 				if currProb>randValue:
-					tokenToUse = key2
+					tokenToUse = action
 					break
 			
 			level[y] += tokenToUse #Add the tile value (tokenToUse) to the level
@@ -69,7 +69,7 @@ for y in range(maxY, -1, -1):
 			level[y] +="-"
 
 #Save the generated level to a file 
-outputFile = open("./Generated Levels/output.txt", 'w')
+outputFile = open(os.path.join(os.getcwd(), "Generated Levels", "output.txt"), 'w')
 for y in range(0, maxY+1):
    	outputFile.write(level[y]+"\n")
 outputFile.close()
